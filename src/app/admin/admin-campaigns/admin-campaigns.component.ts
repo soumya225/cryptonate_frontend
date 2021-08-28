@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import { UserService } from 'src/app/_services';
+import { stringify, ValueTransformer } from '@angular/compiler/src/util';
+
 @Component({
   selector: 'app-admin-campaigns',
   templateUrl: './admin-campaigns.component.html',
@@ -18,8 +20,8 @@ export class AdminCampaignsComponent implements OnInit {
   total_campaigns : number;
   campaign_ind :any;
   campaign_update : FormGroup = new FormGroup({});
+  data_campaign;
   data_user;
-
   constructor(private _campaignService: CampaignService, 
     private modalService: NgbModal,
     private router:Router,
@@ -35,9 +37,7 @@ export class AdminCampaignsComponent implements OnInit {
         first_name : [''],
         last_name : [''],
         email : [''],
-        socmed : [''],
-        author_id : [''],
-        _id : ['']
+        socmed : ['']
       });
     }
 
@@ -100,7 +100,7 @@ export class AdminCampaignsComponent implements OnInit {
       values.about,
       values.author_id
     );
-    this.modalService.dismissAll(); 
+    this.modalService.dismissAll(); //dismiss the modal
   }
   
 }
